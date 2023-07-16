@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Product  = require("./Product.js");
 const User = require("./usernameSchema.js")
 const bcrypt = require("bcrypt")
-const productRoute = require("../classic-furn-be/product.route.js")
+
 const cors = require("cors")
 
 
