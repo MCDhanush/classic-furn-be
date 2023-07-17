@@ -3,6 +3,7 @@ const app = express();
 exports.app = app;
 const mongoose = require('mongoose');
 const Product  = require("./Product.js");
+const Customer  = require("./customer.js");
 const User = require("./usernameSchema.js")
 const bcrypt = require("bcrypt")
 
@@ -22,10 +23,20 @@ app.get("/", function (request, response) {
   });
 
 
-  app.get("/product", async (req, res) => {
+app.get("/product", async (req, res) => {
     try {
         const product = await Product.find({});
         res.status(200).json(product);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
+app.get("/customer", async (req, res) => {
+    try {
+        const customer = await Customer.find({});
+        res.status(200).json(customer);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -53,6 +64,16 @@ app.post("/product",async(req,res)=>{
     try{
       const product = await Product.create(req.body)
       res.status(200).json(product)
+    }catch(error){
+        res.status(500).json({message:error.message})
+        console.log(error.message);
+    }
+})
+
+app.post("/customer",async(req,res)=>{
+    try{
+      const customer = await Customer.create(req.body)
+      res.status(200).json(customer)
     }catch(error){
         res.status(500).json({message:error.message})
         console.log(error.message);
